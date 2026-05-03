@@ -1,68 +1,70 @@
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import { PageShell } from '../../../components/layout/PageShell';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
 import { spacing } from '../../../theme/spacing';
 
 export function LoginScreen() {
   return (
-    <View style={styles.page}>
-      <Pressable onPress={() => router.push('/')} style={styles.backButton}>
+    <PageShell contentStyle={styles.content}>
+      <Pressable onPress={() => router.push('/')}>
         <Text style={styles.backLink}>← Back to Home</Text>
       </Pressable>
 
-      <View style={styles.card}>
-        <Text style={styles.badge}>Platform Access</Text>
-        <Text style={styles.title}>Login to LearnXai</Text>
-        <Text style={styles.subtitle}>
-          Access is currently limited while the platform is being prepared.
-        </Text>
+      <View style={styles.centerArea}>
+        <View style={styles.card}>
+          <Text style={styles.badge}>Platform Access</Text>
+          <Text style={styles.title}>Login to LearnXai</Text>
+          <Text style={styles.subtitle}>
+            Access is currently limited while the platform is being prepared.
+          </Text>
 
-        <View style={styles.form}>
-          <Text style={styles.label}>Email</Text>
-          <TextInput
-            placeholder="you@example.com"
-            placeholderTextColor={colors.textMuted}
-            style={styles.input}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
+          <View style={styles.form}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              placeholder="you@example.com"
+              placeholderTextColor={colors.textMuted}
+              style={styles.input}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
 
-          <Text style={styles.label}>Password</Text>
-          <TextInput
-            placeholder="Enter password"
-            placeholderTextColor={colors.textMuted}
-            style={styles.input}
-            secureTextEntry
-          />
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              placeholder="Enter password"
+              placeholderTextColor={colors.textMuted}
+              style={styles.input}
+              secureTextEntry
+            />
 
-          <Pressable style={styles.primaryButton}>
-            <Text style={styles.primaryButtonText}>Sign In</Text>
-          </Pressable>
+            <Pressable style={styles.primaryButton}>
+              <Text style={styles.primaryButtonText}>Sign In</Text>
+            </Pressable>
 
-          <Pressable onPress={() => router.push('/register')}>
-            <Text style={styles.footerText}>
-              New here? <Text style={styles.footerLinkInline}>Join early access</Text>
-            </Text>
-          </Pressable>
+            <Pressable onPress={() => router.push('/register')}>
+              <Text style={styles.footerText}>
+                New here? <Text style={styles.footerLinkInline}>Join early access</Text>
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
-    </View>
+    </PageShell>
   );
 }
 
 const styles = StyleSheet.create({
-  page: {
+  content: {
     flex: 1,
-    backgroundColor: colors.background,
-    padding: 20,
-    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingTop: spacing.md,
+    paddingBottom: spacing.xl,
   },
-  backButton: {
-    position: 'absolute',
-    top: spacing['2xl'],
-    left: 20,
+  centerArea: {
+    flex: 1,
+    justifyContent: 'center',
   },
   backLink: {
     color: colors.indigoLight,

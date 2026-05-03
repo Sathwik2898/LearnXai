@@ -1,13 +1,14 @@
 import { router } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import { PageShell } from '../../../components/layout/PageShell';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
 import { spacing } from '../../../theme/spacing';
 
 export function RegisterScreen() {
   return (
-    <ScrollView style={styles.page} contentContainerStyle={styles.content}>
+    <PageShell scroll contentStyle={styles.content}>
       <Pressable onPress={() => router.push('/')}>
         <Text style={styles.backLink}>← Back to Home</Text>
       </Pressable>
@@ -63,15 +64,12 @@ export function RegisterScreen() {
           </Pressable>
         </View>
       </View>
-    </ScrollView>
+    </PageShell>
   );
 }
 
 const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
+
   content: {
     flexGrow: 1,
     padding: 20,
