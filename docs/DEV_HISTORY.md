@@ -60,3 +60,30 @@ Focus areas:
 - Prefer free and production-friendly resources.
 - Keep app routes clean.
 - Move reusable logic into src folder gradually.
+## 2026-05-03 - Architecture Step: Move Landing Screen Into Feature Folder
+
+### What changed
+- Created `src/theme/colors.ts`
+- Created `src/theme/spacing.ts`
+- Created `src/theme/radius.ts`
+- Created `src/features/marketing/screens/LandingScreen.tsx`
+- Updated `app/index.tsx` to only export the landing screen route
+
+### Why
+The `app/` folder should stay focused on routing.
+The actual screen UI should live inside `src/features`.
+This keeps the project scalable as LearnXai grows into public, learner, and admin modules.
+
+### Alternatives considered
+1. Keep all UI in `app/index.tsx`
+   - Faster but messy later.
+2. Create full enterprise architecture immediately
+   - Too heavy too early.
+3. Move only the current landing screen into a feature folder
+   - Chosen because it is safe, small, and production-minded.
+
+### Result
+LearnXai now has the beginning of a professional frontend architecture:
+- routes in `app/`
+- feature screens in `src/features/`
+- shared design values in `src/theme/`
