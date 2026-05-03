@@ -87,3 +87,24 @@ LearnXai now has the beginning of a professional frontend architecture:
 - routes in `app/`
 - feature screens in `src/features/`
 - shared design values in `src/theme/`
+## 2026-05-03 - UI System Step: Add AppButton
+
+### What changed
+- Created `src/components/ui/AppButton.tsx`
+- Replaced landing page hero CTA buttons with `AppButton`
+- Replaced landing page course CTA button with `AppButton`
+
+### Why
+Buttons were manually styled inside screens.
+A reusable button improves consistency, reduces duplicate code, and prepares the app for future states like loading, disabled, and animated press feedback.
+
+### Alternatives considered
+1. Keep using raw `Pressable`
+   - Faster but causes duplicated button styles.
+2. Use a third-party UI library
+   - Avoided for now to keep full design control and avoid unnecessary dependency complexity.
+3. Create a small custom `AppButton`
+   - Chosen because it is simple, free, reusable, and production-minded.
+
+### Result
+LearnXai now has the first reusable UI component in its design system.

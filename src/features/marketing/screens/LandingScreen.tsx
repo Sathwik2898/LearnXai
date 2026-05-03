@@ -1,6 +1,6 @@
+import { AppButton } from '@/src/components/ui/AppButton';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-
 import { PageShell } from '../../../components/layout/PageShell';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
@@ -44,13 +44,8 @@ export function LandingScreen() {
                 </Text>
 
                 <View style={styles.actions}>
-                    <Pressable style={styles.primaryButton} onPress={() => router.push('/register')}>
-                        <Text style={styles.primaryButtonText}>Join Early Access</Text>
-                    </Pressable>
-
-                    <Pressable style={styles.secondaryButton} onPress={() => router.push('/courses')}>
-                        <Text style={styles.secondaryButtonText}>View Courses</Text>
-                    </Pressable>
+                    <AppButton title="Join Early Access" onPress={() => router.push('/register')} />
+                    <AppButton title="View Courses" variant="secondary" onPress={() => router.push('/courses')} />
                 </View>
             </View>
 
@@ -91,9 +86,13 @@ export function LandingScreen() {
                     We will publish available courses, learning paths, and LearnXai platform services here.
                 </Text>
 
-                <Pressable style={styles.comingSoonButton} onPress={() => router.push('/courses')}>
-                    <Text style={styles.comingSoonButtonText}>Explore Upcoming Courses</Text>
-                </Pressable>
+                <View style={styles.comingSoonAction}>
+                    <AppButton
+                        title="Explore Upcoming Courses"
+                        variant="secondary"
+                        onPress={() => router.push('/courses')}
+                    />
+                </View>
             </View>
         </PageShell>
     );
@@ -194,29 +193,8 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'center',
     },
-    primaryButton: {
-        backgroundColor: colors.primary,
-        paddingHorizontal: 22,
-        paddingVertical: 14,
-        borderRadius: radius.lg,
-    },
-    primaryButtonText: {
-        color: colors.textPrimary,
-        fontSize: 15,
-        fontWeight: '800',
-    },
-    secondaryButton: {
-        borderWidth: 1,
-        borderColor: colors.borderStrong,
-        backgroundColor: 'rgba(255,255,255,0.06)',
-        paddingHorizontal: 22,
-        paddingVertical: 14,
-        borderRadius: radius.lg,
-    },
-    secondaryButtonText: {
-        color: colors.textPrimary,
-        fontSize: 15,
-        fontWeight: '800',
+    comingSoonAction: {
+        marginTop: spacing.lg,
     },
     section: {
         marginTop: spacing['4xl'],
