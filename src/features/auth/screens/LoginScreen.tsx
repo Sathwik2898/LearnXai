@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { PageShell } from '../../../components/layout/PageShell';
+import { AppInput } from '../../../components/ui/AppInput';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
 import { spacing } from '../../../theme/spacing';
@@ -22,20 +22,15 @@ export function LoginScreen() {
           </Text>
 
           <View style={styles.form}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
+            <AppInput
+              label="Email"
               placeholder="you@example.com"
-              placeholderTextColor={colors.textMuted}
-              style={styles.input}
               keyboardType="email-address"
-              autoCapitalize="none"
             />
 
-            <Text style={styles.label}>Password</Text>
-            <TextInput
+            <AppInput
+              label="Password"
               placeholder="Enter password"
-              placeholderTextColor={colors.textMuted}
-              style={styles.input}
               secureTextEntry
             />
 
@@ -106,21 +101,6 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: spacing.md,
-  },
-  label: {
-    color: '#E5E7EB',
-    fontSize: 13,
-    fontWeight: '800',
-  },
-  input: {
-    backgroundColor: colors.surfaceDark,
-    borderWidth: 1,
-    borderColor: colors.borderLight,
-    borderRadius: radius.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 13,
-    color: colors.textPrimary,
-    fontSize: 15,
   },
   primaryButton: {
     marginTop: spacing.sm,

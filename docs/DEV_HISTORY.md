@@ -129,3 +129,24 @@ A reusable card component keeps surfaces consistent across marketing pages, cour
 
 ### Result
 LearnXai now has reusable button and card components as the beginning of its UI system.
+
+## 2026-05-03 - UI System Step: Add AppInput
+
+### What changed
+- Created src/components/ui/AppInput.tsx
+- Replaced login screen email and password TextInput fields with AppInput
+
+### Why
+Input styling was manually repeated inside screens.
+A reusable input component improves consistency and prepares the app for validation, error messages, disabled states, and controlled form values.
+
+### Alternatives considered
+1. Keep raw TextInput
+   - Faster but duplicates input styles across screens.
+2. Add a form library immediately
+   - Avoided for now because the UI system foundation should come first.
+3. Create a small custom AppInput
+   - Chosen because it is simple, free, reusable, and production-minded.
+
+### Result
+LearnXai now has reusable button, card, and input components as the beginning of its design system.
