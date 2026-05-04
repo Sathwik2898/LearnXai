@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-
 import { PageShell } from '../../../components/layout/PageShell';
+import { PublicHeader } from '../../../components/layout/PublicHeader';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
 import { spacing } from '../../../theme/spacing';
@@ -27,9 +27,7 @@ const upcomingCourses = [
 export function CoursesPreviewScreen() {
   return (
     <PageShell scroll contentStyle={styles.content}>
-      <Pressable onPress={() => router.push('/')}>
-        <Text style={styles.backLink}>← Back to Home</Text>
-      </Pressable>
+      <PublicHeader />
 
       <View style={styles.header}>
         <Text style={styles.badge}>Course Catalog</Text>
@@ -70,14 +68,8 @@ export function CoursesPreviewScreen() {
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
-    paddingTop: spacing['2xl'],
+    paddingTop: spacing.md,
     paddingBottom: spacing['3xl'],
-  },
-  backLink: {
-    color: colors.indigoLight,
-    fontSize: 14,
-    fontWeight: '800',
-    marginBottom: spacing['2xl'],
   },
   header: {
     maxWidth: 780,

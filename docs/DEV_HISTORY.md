@@ -193,3 +193,25 @@ Keeping it as a shared layout component improves consistency and makes future re
 
 ### Result
 LearnXai now has a reusable public navigation component.
+
+## 2026-05-03 - Layout Step: Use PublicHeader In Courses Page
+
+### What changed
+- Added PublicHeader to CoursesPreviewScreen
+- Removed the standalone Back to Home link from the courses page
+- Reduced top padding because PageShell and PublicHeader now manage layout spacing
+
+### Why
+The courses page is part of the public LearnXai experience.
+Using the shared public header creates consistent navigation across public pages and makes the product feel more professional.
+
+### Alternatives considered
+1. Keep the Back to Home link
+   - Simple but less polished for a public website page.
+2. Add a separate courses-only header
+   - Avoided because it would duplicate navigation logic.
+3. Reuse PublicHeader
+   - Chosen because it keeps public page navigation consistent.
+
+### Result
+Landing and Courses now share the same public navigation component.
