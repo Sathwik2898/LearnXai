@@ -108,3 +108,24 @@ A reusable button improves consistency, reduces duplicate code, and prepares the
 
 ### Result
 LearnXai now has the first reusable UI component in its design system.
+## 2026-05-03 - UI System Step: Add AppCard
+
+### What changed
+- Created src/components/ui/AppCard.tsx
+- Replaced landing page feature card wrappers with AppCard
+- Replaced landing page coming soon panel wrapper with AppCard
+
+### Why
+Cards were manually styled inside the landing screen.
+A reusable card component keeps surfaces consistent across marketing pages, course catalog, dashboards, analytics, certificates, and future LMS modules.
+
+### Alternatives considered
+1. Keep raw View card wrappers
+   - Faster but duplicates styling across screens.
+2. Use a third-party UI card component
+   - Avoided for now to keep full design control and avoid dependency overhead.
+3. Create a small custom AppCard
+   - Chosen because it is reusable, free, controlled, and production-minded.
+
+### Result
+LearnXai now has reusable button and card components as the beginning of its UI system.

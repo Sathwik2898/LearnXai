@@ -2,10 +2,10 @@ import { AppButton } from '@/src/components/ui/AppButton';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { PageShell } from '../../../components/layout/PageShell';
+import { AppCard } from '../../../components/ui/AppCard';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
 import { spacing } from '../../../theme/spacing';
-
 export function LandingScreen() {
     return (
         <PageShell scroll contentStyle={styles.content}>
@@ -54,46 +54,46 @@ export function LandingScreen() {
                 <Text style={styles.sectionTitle}>Everything needed for a modern LMS</Text>
 
                 <View style={styles.cardsGrid}>
-                    <View style={styles.card}>
+                    <AppCard style={styles.card}>
                         <Text style={styles.cardIcon}>🎓</Text>
                         <Text style={styles.cardTitle}>Course Experiences</Text>
                         <Text style={styles.cardText}>
                             Create structured courses, lessons, quizzes, notes, bookmarks, and learning paths.
                         </Text>
-                    </View>
+                    </AppCard>
 
-                    <View style={styles.card}>
+                    <AppCard style={styles.card}>
                         <Text style={styles.cardIcon}>🤖</Text>
                         <Text style={styles.cardTitle}>AI-first Learning</Text>
                         <Text style={styles.cardText}>
                             Prepare for AI recommendations, smart summaries, learner insights, and guided progress.
                         </Text>
-                    </View>
+                    </AppCard>
 
-                    <View style={styles.card}>
+                    <AppCard style={styles.card}>
                         <Text style={styles.cardIcon}>📊</Text>
                         <Text style={styles.cardTitle}>Analytics Ready</Text>
                         <Text style={styles.cardText}>
                             Track learner engagement, course progress, completion rates, and performance reports.
                         </Text>
-                    </View>
+                    </AppCard>
                 </View>
             </View>
 
-            <View style={styles.comingSoonSection}>
+            <AppCard variant="highlight" style={styles.comingSoonSection}>
                 <Text style={styles.comingSoonTitle}>Course catalog is opening soon</Text>
                 <Text style={styles.comingSoonText}>
                     We will publish available courses, learning paths, and LearnXai platform services here.
                 </Text>
 
-                <View style={styles.comingSoonAction}>
+                <AppCard variant="highlight" style={styles.comingSoonSection}>
                     <AppButton
                         title="Explore Upcoming Courses"
                         variant="secondary"
                         onPress={() => router.push('/courses')}
                     />
-                </View>
-            </View>
+                </AppCard>
+            </AppCard>
         </PageShell>
     );
 }
@@ -228,11 +228,6 @@ const styles = StyleSheet.create({
     card: {
         width: 320,
         minHeight: 190,
-        backgroundColor: colors.surfaceGlass,
-        borderWidth: 1,
-        borderColor: colors.borderGlass,
-        borderRadius: radius.xl,
-        padding: 22,
     },
     cardIcon: {
         fontSize: 30,
@@ -253,12 +248,9 @@ const styles = StyleSheet.create({
         marginTop: 42,
         maxWidth: 720,
         alignSelf: 'center',
-        backgroundColor: colors.primarySoft,
-        borderWidth: 1,
-        borderColor: colors.borderPrimary,
+        alignItems: 'center',
         borderRadius: radius['2xl'],
         padding: spacing.xl,
-        alignItems: 'center',
     },
     comingSoonTitle: {
         color: colors.textPrimary,
