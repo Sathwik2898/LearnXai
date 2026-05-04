@@ -215,3 +215,26 @@ Using the shared public header creates consistent navigation across public pages
 
 ### Result
 Landing and Courses now share the same public navigation component.
+
+## 2026-05-03 - Refactor: Use UI Components In Courses Page
+
+### What changed
+- Replaced course card wrappers in CoursesPreviewScreen with AppCard
+- Replaced the courses CTA panel wrapper with AppCard
+- Replaced the courses CTA button with AppButton
+- Removed duplicated card and button styles from the courses page
+
+### Why
+Courses page was still using raw card and button styles.
+Using shared UI components keeps the public pages consistent and reduces duplicated styling.
+
+### Alternatives considered
+1. Keep raw View and Pressable
+   - Faster but duplicates card and button styling.
+2. Refactor every public page at once
+   - Avoided to keep the change small and easy to verify.
+3. Refactor Courses page only
+   - Chosen because it is safe and continues the design-system migration step by step.
+
+### Result
+Landing and Courses now both use shared AppCard and AppButton components.

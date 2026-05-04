@@ -1,7 +1,9 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { PageShell } from '../../../components/layout/PageShell';
 import { PublicHeader } from '../../../components/layout/PublicHeader';
+import { AppButton } from '../../../components/ui/AppButton';
+import { AppCard } from '../../../components/ui/AppCard';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
 import { spacing } from '../../../theme/spacing';
@@ -39,7 +41,7 @@ export function CoursesPreviewScreen() {
 
       <View style={styles.grid}>
         {upcomingCourses.map((course) => (
-          <View key={course.title} style={styles.card}>
+          <AppCard key={course.title} style={styles.card}>
             <Text style={styles.level}>{course.level}</Text>
             <Text style={styles.cardTitle}>{course.title}</Text>
             <Text style={styles.cardText}>{course.description}</Text>
@@ -47,20 +49,20 @@ export function CoursesPreviewScreen() {
             <View style={styles.statusPill}>
               <Text style={styles.statusText}>Coming Soon</Text>
             </View>
-          </View>
+          </AppCard>
         ))}
       </View>
 
-      <View style={styles.ctaBox}>
+      <AppCard variant="highlight" style={styles.ctaBox}>
         <Text style={styles.ctaTitle}>Want early access?</Text>
         <Text style={styles.ctaText}>
           Join the early access list and get notified when LearnXai opens enrollment.
         </Text>
 
-        <Pressable style={styles.primaryButton} onPress={() => router.push('/register')}>
-          <Text style={styles.primaryButtonText}>Join Early Access</Text>
-        </Pressable>
-      </View>
+        <View style={styles.ctaAction}>
+          <AppButton title="Join Early Access" onPress={() => router.push('/register')} />
+        </View>
+      </AppCard>
     </PageShell>
   );
 }
@@ -108,11 +110,6 @@ const styles = StyleSheet.create({
   card: {
     width: 330,
     minHeight: 230,
-    backgroundColor: colors.surfaceGlass,
-    borderWidth: 1,
-    borderColor: colors.borderGlass,
-    borderRadius: radius.xl,
-    padding: 22,
   },
   level: {
     color: colors.indigoLight,
@@ -154,11 +151,11 @@ const styles = StyleSheet.create({
     maxWidth: 720,
     alignSelf: 'center',
     alignItems: 'center',
-    backgroundColor: colors.primarySoft,
-    borderWidth: 1,
-    borderColor: colors.borderPrimary,
     borderRadius: radius['2xl'],
     padding: spacing.xl,
+  },
+  ctaAction: {
+    marginTop: spacing.lg,
   },
   ctaTitle: {
     color: colors.textPrimary,
@@ -172,16 +169,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: spacing.sm,
   },
-  primaryButton: {
-    marginTop: spacing.lg,
-    backgroundColor: colors.primary,
-    paddingHorizontal: 20,
-    paddingVertical: 13,
-    borderRadius: radius.md,
-  },
-  primaryButtonText: {
-    color: colors.textPrimary,
-    fontSize: 14,
-    fontWeight: '900',
-  },
+
 });
