@@ -238,3 +238,26 @@ Using shared UI components keeps the public pages consistent and reduces duplica
 
 ### Result
 Landing and Courses now both use shared AppCard and AppButton components.
+
+## 2026-05-03 - Layout Step: Use PublicHeader In Register Page
+
+### What changed
+- Added PublicHeader to RegisterScreen
+- Removed the standalone Back to Home link from the register page
+- Aligned register page top spacing with other public pages
+- Added an auth section wrapper to control form spacing below the public header
+
+### Why
+Register is part of the public LearnXai access flow.
+Using the shared public header keeps navigation consistent across landing, courses, login, and register pages.
+
+### Alternatives considered
+1. Keep the standalone back link
+   - Simple but inconsistent with other public pages.
+2. Apply header to all auth pages at once
+   - Login was already handled first to reduce risk.
+3. Apply PublicHeader to register after login
+   - Chosen because it completes current public navigation consistency safely.
+
+### Result
+All current public pages now share the same public navigation component.

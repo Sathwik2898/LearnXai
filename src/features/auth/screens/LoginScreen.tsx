@@ -12,7 +12,7 @@ export function LoginScreen() {
     <PageShell contentStyle={styles.content}>
       <PublicHeader />
 
-      <View style={styles.centerArea}>
+      <View style={styles.authSection}>
         <View style={styles.card}>
           <Text style={styles.badge}>Platform Access</Text>
           <Text style={styles.title}>Login to LearnXai</Text>
@@ -55,6 +55,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 28,
     paddingBottom: spacing.xl,
+  },
+  authSection: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: spacing['3xl'],
   },
   centerArea: {
     flex: 1,

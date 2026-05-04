@@ -1,8 +1,8 @@
+import { AppInput } from '@/src/components/ui/AppInput';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-
-import { AppInput } from '@/src/components/ui/AppInput';
 import { PageShell } from '../../../components/layout/PageShell';
+import { PublicHeader } from '../../../components/layout/PublicHeader';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
 import { spacing } from '../../../theme/spacing';
@@ -10,45 +10,45 @@ import { spacing } from '../../../theme/spacing';
 export function RegisterScreen() {
   return (
     <PageShell scroll contentStyle={styles.content}>
-      <Pressable onPress={() => router.push('/')}>
-        <Text style={styles.backLink}>← Back to Home</Text>
-      </Pressable>
+      <PublicHeader />
 
-      <View style={styles.card}>
-        <Text style={styles.badge}>Early Access</Text>
-        <Text style={styles.title}>Join LearnXai early access</Text>
-        <Text style={styles.subtitle}>
-          Register your interest and get notified when LearnXai opens access.
-        </Text>
+      <View style={styles.authSection}>
+        <View style={styles.card}>
+          <Text style={styles.badge}>Early Access</Text>
+          <Text style={styles.title}>Join LearnXai early access</Text>
+          <Text style={styles.subtitle}>
+            Register your interest and get notified when LearnXai opens access.
+          </Text>
 
-        <View style={styles.form}>
-          <AppInput label="Full Name" placeholder="Enter your full name" />
+          <View style={styles.form}>
+            <AppInput label="Full Name" placeholder="Enter your full name" />
 
-          <AppInput
-            label="Email"
-            placeholder="you@example.com"
-            keyboardType="email-address"
-          />
+            <AppInput
+              label="Email"
+              placeholder="you@example.com"
+              keyboardType="email-address"
+            />
 
-          <AppInput
-            label="Interest"
-            placeholder="Learner, institute, business, admin, etc."
-          />
+            <AppInput
+              label="Interest"
+              placeholder="Learner, institute, business, admin, etc."
+            />
 
-          <AppInput
-            label="Message"
-            placeholder="Tell us what you want to learn or launch"
-            multiline
-          />
-          <Pressable style={styles.primaryButton}>
-            <Text style={styles.primaryButtonText}>Submit Early Access Request</Text>
-          </Pressable>
+            <AppInput
+              label="Message"
+              placeholder="Tell us what you want to learn or launch"
+              multiline
+            />
+            <Pressable style={styles.primaryButton}>
+              <Text style={styles.primaryButtonText}>Submit Early Access Request</Text>
+            </Pressable>
 
-          <Pressable onPress={() => router.push('/login')}>
-            <Text style={styles.footerText}>
-              Already have access? <Text style={styles.footerLinkInline}>Login</Text>
-            </Text>
-          </Pressable>
+            <Pressable onPress={() => router.push('/login')}>
+              <Text style={styles.footerText}>
+                Already have access? <Text style={styles.footerLinkInline}>Login</Text>
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </PageShell>
@@ -59,15 +59,9 @@ const styles = StyleSheet.create({
 
   content: {
     flexGrow: 1,
-    padding: 20,
-    paddingTop: spacing['2xl'],
-    justifyContent: 'center',
-  },
-  backLink: {
-    color: colors.indigoLight,
-    fontSize: 14,
-    fontWeight: '800',
-    marginBottom: spacing.xl,
+    paddingHorizontal: 20,
+    paddingTop: 28,
+    paddingBottom: spacing.xl,
   },
   card: {
     width: '100%',
@@ -78,6 +72,11 @@ const styles = StyleSheet.create({
     borderColor: colors.borderGlass,
     borderRadius: radius['3xl'],
     padding: 26,
+  },
+  authSection: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: spacing['3xl'],
   },
   badge: {
     color: colors.indigoMedium,
