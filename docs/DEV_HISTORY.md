@@ -150,3 +150,24 @@ A reusable input component improves consistency and prepares the app for validat
 
 ### Result
 LearnXai now has reusable button, card, and input components as the beginning of its design system.
+
+## 2026-05-03 - Refactor: Use AppInput In Register Screen
+
+### What changed
+- Replaced raw TextInput fields in RegisterScreen with AppInput
+- Removed duplicate label, input, and textarea styles from RegisterScreen
+
+### Why
+The register screen had repeated form field styling.
+Using AppInput keeps auth forms visually consistent and makes future validation/error handling easier.
+
+### Alternatives considered
+1. Keep raw TextInput in register
+   - Faster but duplicates form styling.
+2. Refactor all forms at once
+   - Avoided to keep the change safe and easy to verify.
+3. Apply AppInput only to register after testing it on login
+   - Chosen because it is controlled and low-risk.
+
+### Result
+Login and register now share the same reusable input component.

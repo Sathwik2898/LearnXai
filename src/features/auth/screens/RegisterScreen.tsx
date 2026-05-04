@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { AppInput } from '@/src/components/ui/AppInput';
 import { PageShell } from '../../../components/layout/PageShell';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
@@ -21,38 +22,24 @@ export function RegisterScreen() {
         </Text>
 
         <View style={styles.form}>
-          <Text style={styles.label}>Full Name</Text>
-          <TextInput
-            placeholder="Enter your full name"
-            placeholderTextColor={colors.textMuted}
-            style={styles.input}
-          />
+          <AppInput label="Full Name" placeholder="Enter your full name" />
 
-          <Text style={styles.label}>Email</Text>
-          <TextInput
+          <AppInput
+            label="Email"
             placeholder="you@example.com"
-            placeholderTextColor={colors.textMuted}
-            style={styles.input}
             keyboardType="email-address"
-            autoCapitalize="none"
           />
 
-          <Text style={styles.label}>Interest</Text>
-          <TextInput
+          <AppInput
+            label="Interest"
             placeholder="Learner, institute, business, admin, etc."
-            placeholderTextColor={colors.textMuted}
-            style={styles.input}
           />
 
-          <Text style={styles.label}>Message</Text>
-          <TextInput
+          <AppInput
+            label="Message"
             placeholder="Tell us what you want to learn or launch"
-            placeholderTextColor={colors.textMuted}
-            style={[styles.input, styles.textArea]}
             multiline
-            textAlignVertical="top"
           />
-
           <Pressable style={styles.primaryButton}>
             <Text style={styles.primaryButtonText}>Submit Early Access Request</Text>
           </Pressable>
@@ -118,24 +105,6 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: spacing.md,
-  },
-  label: {
-    color: '#E5E7EB',
-    fontSize: 13,
-    fontWeight: '800',
-  },
-  input: {
-    backgroundColor: colors.surfaceDark,
-    borderWidth: 1,
-    borderColor: colors.borderLight,
-    borderRadius: radius.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 13,
-    color: colors.textPrimary,
-    fontSize: 15,
-  },
-  textArea: {
-    minHeight: 100,
   },
   primaryButton: {
     marginTop: spacing.sm,
