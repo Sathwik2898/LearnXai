@@ -171,3 +171,25 @@ Using AppInput keeps auth forms visually consistent and makes future validation/
 
 ### Result
 Login and register now share the same reusable input component.
+
+## 2026-05-03 - Layout Step: Add PublicHeader
+
+### What changed
+- Created src/components/layout/PublicHeader.tsx
+- Moved landing page navigation/header UI into PublicHeader
+- Replaced landing page inline navbar with <PublicHeader />
+
+### Why
+The public navigation will be reused across landing, courses, login, register, pricing, FAQ, and certificate verification pages.
+Keeping it as a shared layout component improves consistency and makes future responsive/mobile header improvements easier.
+
+### Alternatives considered
+1. Keep navbar inside LandingScreen
+   - Faster but duplicates header code later.
+2. Put header directly inside PageShell
+   - Avoided because not every screen may need the same header.
+3. Create a separate PublicHeader
+   - Chosen because it is reusable, controlled, and production-minded.
+
+### Result
+LearnXai now has a reusable public navigation component.
