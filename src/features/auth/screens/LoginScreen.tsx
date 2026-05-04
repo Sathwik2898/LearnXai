@@ -1,3 +1,4 @@
+import { PublicHeader } from '@/src/components/layout/PublicHeader';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { PageShell } from '../../../components/layout/PageShell';
@@ -9,9 +10,7 @@ import { spacing } from '../../../theme/spacing';
 export function LoginScreen() {
   return (
     <PageShell contentStyle={styles.content}>
-      <Pressable onPress={() => router.push('/')}>
-        <Text style={styles.backLink}>← Back to Home</Text>
-      </Pressable>
+      <PublicHeader />
 
       <View style={styles.centerArea}>
         <View style={styles.card}>
@@ -54,17 +53,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: spacing.md,
+    paddingTop: 28,
     paddingBottom: spacing.xl,
   },
   centerArea: {
     flex: 1,
     justifyContent: 'center',
-  },
-  backLink: {
-    color: colors.indigoLight,
-    fontSize: 14,
-    fontWeight: '800',
   },
   card: {
     width: '100%',

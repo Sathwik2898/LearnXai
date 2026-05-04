@@ -70,7 +70,7 @@ export function CoursesPreviewScreen() {
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
-    paddingTop: spacing.md,
+    paddingTop: 28,
     paddingBottom: spacing['3xl'],
   },
   header: {
