@@ -47,8 +47,7 @@ export function ForgotPasswordScreen() {
   }
 
   return (
-    <PageShell scroll contentStyle={styles.content}>
-      <PublicHeader />
+    <PageShell scroll header={<PublicHeader />} contentStyle={styles.content}>
 
       <View style={styles.authSection}>
         <AppCard style={styles.card}>
@@ -92,13 +91,12 @@ export function ForgotPasswordScreen() {
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
-    paddingTop: 28,
+    paddingTop: spacing['3xl'],
     paddingBottom: spacing.xl,
   },
   authSection: {
     width: '100%',
     alignItems: 'center',
-    marginTop: spacing['3xl'],
   },
   card: {
     width: '100%',

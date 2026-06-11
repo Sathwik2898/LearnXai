@@ -9,8 +9,7 @@ import { spacing } from '../../../theme/spacing';
 
 export function RegisterScreen() {
   return (
-    <PageShell scroll contentStyle={styles.content}>
-      <PublicHeader />
+    <PageShell scroll header={<PublicHeader />} contentStyle={styles.content}>
 
       <View style={styles.authSection}>
         <View style={styles.card}>
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
     paddingHorizontal: 20,
-    paddingTop: 28,
+    paddingTop: spacing['3xl'],
     paddingBottom: spacing.xl,
   },
   card: {
@@ -76,7 +75,6 @@ const styles = StyleSheet.create({
   authSection: {
     width: '100%',
     alignItems: 'center',
-    marginTop: spacing['3xl'],
   },
   badge: {
     color: colors.indigoMedium,

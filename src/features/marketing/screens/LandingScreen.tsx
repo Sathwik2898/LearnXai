@@ -10,8 +10,7 @@ import { spacing } from '../../../theme/spacing';
 
 export function LandingScreen() {
     return (
-        <PageShell scroll contentStyle={styles.content}>
-            <PublicHeader />
+        <PageShell scroll header={<PublicHeader />} contentStyle={styles.content}>
 
             <View style={styles.heroBadge}>
                 <Text style={styles.heroBadgeText}>Launching Soon • AI-first LMS</Text>
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
 
     content: {
         paddingHorizontal: 20,
-        paddingTop: 28,
+        paddingTop: spacing['3xl'],
         paddingBottom: 48,
     },
     heroBadge: {

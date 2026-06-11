@@ -286,3 +286,27 @@ This also verifies the mock-ready auth service architecture before binding login
 
 ### Result
 LearnXai now has the first auth screen connected to the mock API service layer.
+
+## 2026-05-03 - Layout Fix: Sticky Responsive Public Header
+
+### What changed
+- Updated PageShell to support a fixed header slot
+- Moved PublicHeader outside scrollable screen content
+- Updated public screens to pass header={<PublicHeader />} into PageShell
+- Made PublicHeader responsive for compact mobile widths
+- Improved mobile header layout so navigation no longer squeezes into one broken row
+
+### Why
+The previous mobile header was cramped and scrolled with the page content.
+A production public app needs consistent sticky navigation across landing, courses, login, register, and forgot-password pages.
+
+### Alternatives considered
+1. Add random margin/padding fixes per screen
+   - Avoided because it would not solve sticky behavior or long-term consistency.
+2. Use ScrollView stickyHeaderIndices
+   - Avoided because it would keep header management inside each individual screen.
+3. Add a header slot to PageShell
+   - Chosen because it centralizes sticky header behavior and keeps screens cleaner.
+
+### Result
+LearnXai now has a sticky, responsive public header controlled at layout-shell level.

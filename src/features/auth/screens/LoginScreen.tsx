@@ -9,8 +9,7 @@ import { spacing } from '../../../theme/spacing';
 
 export function LoginScreen() {
   return (
-    <PageShell contentStyle={styles.content}>
-      <PublicHeader />
+    <PageShell header={<PublicHeader />} contentStyle={styles.content}>
 
       <View style={styles.authSection}>
         <View style={styles.card}>
@@ -55,13 +54,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 28,
+    paddingTop: spacing['3xl'],
     paddingBottom: spacing.xl,
   },
   authSection: {
     width: '100%',
     alignItems: 'center',
-    marginTop: spacing['3xl'],
   },
   footerLink: {
     color: colors.indigoLight,

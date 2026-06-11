@@ -28,8 +28,7 @@ const upcomingCourses = [
 
 export function CoursesPreviewScreen() {
   return (
-    <PageShell scroll contentStyle={styles.content}>
-      <PublicHeader />
+    <PageShell scroll header={<PublicHeader />} contentStyle={styles.content}>
 
       <View style={styles.header}>
         <Text style={styles.badge}>Course Catalog</Text>
@@ -70,7 +69,7 @@ export function CoursesPreviewScreen() {
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
-    paddingTop: 28,
+    paddingTop: spacing['3xl'],
     paddingBottom: spacing['3xl'],
   },
   header: {
