@@ -36,7 +36,9 @@ export function LoginScreen() {
             <Pressable style={styles.primaryButton}>
               <Text style={styles.primaryButtonText}>Sign In</Text>
             </Pressable>
-
+            <Pressable onPress={() => router.push('/forgot-password')}>
+              <Text style={styles.footerLink}>Forgot password?</Text>
+            </Pressable>
             <Pressable onPress={() => router.push('/register')}>
               <Text style={styles.footerText}>
                 New here? <Text style={styles.footerLinkInline}>Join early access</Text>
@@ -60,6 +62,13 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginTop: spacing['3xl'],
+  },
+  footerLink: {
+    color: colors.indigoLight,
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: '800',
+    marginTop: spacing.sm,
   },
   centerArea: {
     flex: 1,

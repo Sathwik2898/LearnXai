@@ -7,16 +7,27 @@ type AppButtonVariant = 'primary' | 'secondary' | 'ghost';
 
 type AppButtonProps = {
   title: string;
-  onPress: () => void;
+  onPress: () => void | Promise<void>;
   variant?: AppButtonVariant;
+  disabled?: boolean;
+  loading?: boolean;
 };
 
-export function AppButton({ title, onPress, variant = 'primary' }: AppButtonProps) {
+export function AppButton({
+  title,
+  onPress,
+  variant = 'primary',
+  disabled = false,
+  loading = false,
+}: AppButtonProps) {
+  const isDisabled = disabled || loading;
+
   const buttonStyle = [
     styles.base,
     variant === 'primary' && styles.primary,
     variant === 'secondary' && styles.secondary,
     variant === 'ghost' && styles.ghost,
+    isDisabled && styles.disabled,
   ];
 
   const textStyle = [
@@ -25,8 +36,8 @@ export function AppButton({ title, onPress, variant = 'primary' }: AppButtonProp
   ];
 
   return (
-    <Pressable style={buttonStyle} onPress={onPress}>
-      <Text style={textStyle}>{title}</Text>
+    <Pressable style={buttonStyle} onPress={onPress} disabled={isDisabled}>
+      <Text style={textStyle}>{loading ? 'Please wait...' : title}</Text>
     </Pressable>
   );
 }
@@ -51,6 +62,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     paddingHorizontal: 0,
     paddingVertical: 0,
+  },
+  disabled: {
+    opacity: 0.55,
   },
   text: {
     color: colors.textPrimary,

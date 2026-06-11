@@ -261,3 +261,28 @@ Using the shared public header keeps navigation consistent across landing, cours
 
 ### Result
 All current public pages now share the same public navigation component.
+
+## 2026-05-03 - Auth Flow Step: Add Forgot Password Screen
+
+### What changed
+- Added src/features/auth/screens/ForgotPasswordScreen.tsx
+- Added pp/forgot-password.tsx
+- Connected forgot-password screen to uthService.forgotPassword
+- Added loading, success, and error states
+- Added forgot-password link from the login page
+- Enhanced AppButton with loading and disabled support
+
+### Why
+Forgot password is part of the public authentication flow.
+This also verifies the mock-ready auth service architecture before binding login and register forms.
+
+### Alternatives considered
+1. Build a static forgot-password page
+   - Avoided because it would not test the API service layer.
+2. Bind login/register first
+   - Deferred because forgot password is smaller and safer as the first API-connected screen.
+3. Add forgot-password with mock API binding
+   - Chosen because it validates service structure, loading state, and response handling safely.
+
+### Result
+LearnXai now has the first auth screen connected to the mock API service layer.
