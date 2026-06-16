@@ -1,24 +1,79 @@
 export const colors = {
-  background: '#080B1A',
+  /**
+   * Core background system
+   */
+  background: '#050713',
+  deepSpace: '#050713',
+  midnight: '#080B1A',
+  midnightElevated: '#0D1226',
+  obsidian: '#03040C',
 
-  textPrimary: '#FFFFFF',
-  textSecondary: '#A7B0D8',
-  textMuted: '#667299',
+  /**
+   * Text system
+   */
+  textPrimary: '#F8FAFC',
+  textSecondary: '#B8C2EA',
+  textMuted: '#737EA8',
+  textSoft: '#E5E9FF',
 
-  primary: '#6366F1',
-  primarySoft: 'rgba(99, 102, 241, 0.12)',
-  primaryGlass: 'rgba(79, 70, 229, 0.16)',
+  /**
+   * Brand colors
+   */
+  primary: '#7467FF',
+  primarySoft: 'rgba(116, 103, 255, 0.14)',
+  primaryGlass: 'rgba(116, 103, 255, 0.20)',
 
-  indigoLight: '#C7D2FE',
-  indigoMedium: '#818CF8',
+  electricIndigo: '#7467FF',
+  indigoLight: '#D8DDFF',
+  indigoMedium: '#8D8CFF',
 
-  surfaceGlass: 'rgba(255,255,255,0.07)',
-  surfaceGlassLight: 'rgba(255,255,255,0.08)',
-  surfaceDark: 'rgba(8,11,26,0.72)',
+  neuralCyan: '#42D8FF',
+  neuralCyanSoft: 'rgba(66, 216, 255, 0.14)',
 
-  borderGlass: 'rgba(255,255,255,0.10)',
-  borderLight: 'rgba(255,255,255,0.14)',
-  borderStrong: 'rgba(255,255,255,0.18)',
-  borderPrimary: 'rgba(129, 140, 248, 0.25)',
-  borderPrimaryStrong: 'rgba(129, 140, 248, 0.35)',
+  auroraViolet: '#B36BFF',
+  auroraVioletSoft: 'rgba(179, 107, 255, 0.14)',
+
+  luminousBlue: '#68A8FF',
+  luminousBlueSoft: 'rgba(104, 168, 255, 0.14)',
+
+  /**
+   * Premium surfaces
+   */
+  surfaceGlass: 'rgba(255, 255, 255, 0.065)',
+  surfaceGlassLight: 'rgba(255, 255, 255, 0.095)',
+  surfaceDark: 'rgba(7, 10, 22, 0.82)',
+  surfaceElevated: 'rgba(17, 23, 46, 0.88)',
+  surfacePremium: 'rgba(20, 26, 52, 0.92)',
+
+  glassDark: 'rgba(10, 14, 30, 0.78)',
+  glassElevated: 'rgba(18, 24, 48, 0.84)',
+  glassHighlight: 'rgba(255, 255, 255, 0.12)',
+
+  /**
+   * Borders
+   */
+  borderGlass: 'rgba(255, 255, 255, 0.11)',
+  borderLight: 'rgba(255, 255, 255, 0.15)',
+  borderStrong: 'rgba(255, 255, 255, 0.22)',
+
+  borderPrimary: 'rgba(141, 140, 255, 0.30)',
+  borderPrimaryStrong: 'rgba(141, 140, 255, 0.46)',
+
+  borderCyan: 'rgba(66, 216, 255, 0.30)',
+  borderViolet: 'rgba(179, 107, 255, 0.32)',
+
+  /**
+   * Glow system
+   */
+  glowPrimary: 'rgba(116, 103, 255, 0.34)',
+  glowCyan: 'rgba(66, 216, 255, 0.22)',
+  glowViolet: 'rgba(179, 107, 255, 0.24)',
+
+  /**
+   * Status colors
+   */
+  success: '#8FFFC1',
+  successSoft: 'rgba(143, 255, 193, 0.12)',
+  warning: '#FFD166',
+  danger: '#FF8FA3',
 };
