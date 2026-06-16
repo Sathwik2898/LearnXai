@@ -334,3 +334,17 @@ A strong first impression requires the navigation to look intentional, stable, a
 
 ### Result
 LearnXai now has a cleaner sticky mobile header with a premium two-row navigation layout.
+
+## 2026-06-16 - Visual System Step: Premium Gradient Buttons and Cards
+
+### What changed
+- Added expo-linear-gradient
+- Upgraded AppButton with premium gradient surfaces, shine treatment, and stronger CTA depth
+- Upgraded AppCard with gradient glass surfaces, top highlight, corner glow, and stronger depth
+
+### Why
+The landing page started to gain visual direction, but the shared UI primitives still felt basic.
+Premium UI requires the base components themselves to feel polished because they appear across landing, courses, login, register, and forgot-password pages.
+
+### Result
+LearnXai now has richer shared visual components that improve multiple screens without changing each screen individually.
