@@ -42,9 +42,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   headerWrap: {
-    backgroundColor: 'rgba(8, 11, 26, 0.96)',
+    backgroundColor: 'rgba(8, 11, 26, 0.97)',
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.06)',
+    borderBottomColor: 'rgba(255,255,255,0.08)',
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.24,
+    shadowRadius: 24,
+    elevation: 12,
+    zIndex: 20,
   },
   page: {
     flex: 1,

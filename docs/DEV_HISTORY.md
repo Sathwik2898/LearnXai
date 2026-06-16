@@ -310,3 +310,27 @@ A production public app needs consistent sticky navigation across landing, cours
 
 ### Result
 LearnXai now has a sticky, responsive public header controlled at layout-shell level.
+
+## 2026-05-03 - UI Polish Step: Premium Mobile Public Header
+
+### What changed
+- Refined sticky header depth in PageShell
+- Updated PublicHeader mobile layout into two rows
+- Added mobile nav tray styling
+- Added active route highlighting for Courses, Login/Forgot Password, and Register
+- Improved mobile logo sizing, spacing, and CTA button treatment
+
+### Why
+The previous mobile header was functional but did not feel premium.
+A strong first impression requires the navigation to look intentional, stable, and polished across mobile and web.
+
+### Alternatives considered
+1. Keep one-row mobile header
+   - Avoided because it caused cramped layout and weak mobile impression.
+2. Add a hamburger menu immediately
+   - Deferred because the current public nav has only three actions and a two-row layout is clearer.
+3. Use a two-row sticky mobile header
+   - Chosen because it is simple, premium-looking, and reliable for the current public app stage.
+
+### Result
+LearnXai now has a cleaner sticky mobile header with a premium two-row navigation layout.
