@@ -1,8 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-
 import { colors } from '../../theme/colors';
 import { radius } from '../../theme/radius';
+import { typography } from '../../theme/typography';
 
 type AppButtonVariant = 'primary' | 'secondary' | 'ghost';
 
@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
   },
   primaryText: {
     color: colors.textPrimary,
+    fontFamily: typography.fontFamily.bodyExtraBold,
     fontSize: 15,
-    fontWeight: '900',
     letterSpacing: 0.2,
   },
   secondarySurface: {
@@ -121,18 +121,18 @@ const styles = StyleSheet.create({
   },
   secondaryText: {
     color: colors.indigoLight,
+    fontFamily: typography.fontFamily.bodyExtraBold,
     fontSize: 15,
-    fontWeight: '900',
     letterSpacing: 0.2,
+  },
+  ghostText: {
+    color: colors.indigoLight,
+    fontFamily: typography.fontFamily.bodyExtraBold,
+    fontSize: 15,
   },
   ghostSurface: {
     minHeight: 42,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  ghostText: {
-    color: colors.indigoLight,
-    fontSize: 15,
-    fontWeight: '900',
-  },
+  }
 });

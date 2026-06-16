@@ -1,9 +1,9 @@
 import { router, usePathname } from 'expo-router';
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-
 import { colors } from '../../theme/colors';
 import { radius } from '../../theme/radius';
 import { spacing } from '../../theme/spacing';
+import { typography } from '../../theme/typography';
 
 export function PublicHeader() {
   const pathname = usePathname();
@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     color: colors.textPrimary,
+    fontFamily: typography.fontFamily.heading,
     fontSize: 22,
-    fontWeight: '900',
-    letterSpacing: 0.3,
+    letterSpacing: -0.4,
   },
   logoCompact: {
     fontSize: 28,
@@ -132,8 +132,8 @@ const styles = StyleSheet.create({
   },
   navLink: {
     color: colors.indigoLight,
+    fontFamily: typography.fontFamily.bodyBold,
     fontSize: 14,
-    fontWeight: '800',
   },
   navLinkCompact: {
     fontSize: 13,
@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
   },
   navButtonText: {
     color: colors.textPrimary,
+    fontFamily: typography.fontFamily.bodyExtraBold,
     fontSize: 13,
-    fontWeight: '900',
   },
   navButtonTextCompact: {
     fontSize: 12,

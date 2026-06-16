@@ -1,6 +1,5 @@
 import { router } from 'expo-router';
 import { StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-
 import { PageShell } from '../../../components/layout/PageShell';
 import { PublicHeader } from '../../../components/layout/PublicHeader';
 import { AppButton } from '../../../components/ui/AppButton';
@@ -8,6 +7,7 @@ import { AppCard } from '../../../components/ui/AppCard';
 import { colors } from '../../../theme/colors';
 import { radius } from '../../../theme/radius';
 import { spacing } from '../../../theme/spacing';
+import { typography } from '../../../theme/typography';
 
 const productSignals = [
     'AI mentor',
@@ -302,16 +302,16 @@ const styles = StyleSheet.create({
     },
     kickerText: {
         color: colors.indigoLight,
+        fontFamily: typography.fontFamily.bodyExtraBold,
         fontSize: 13,
-        fontWeight: '900',
         textTransform: 'uppercase',
         letterSpacing: 0.7,
     },
     heroTitle: {
         color: colors.textPrimary,
+        fontFamily: typography.fontFamily.heading,
         fontSize: 66,
         lineHeight: 70,
-        fontWeight: '900',
         letterSpacing: -2.9,
         maxWidth: 740,
     },
@@ -322,6 +322,7 @@ const styles = StyleSheet.create({
     },
     heroSubtitle: {
         color: colors.textSecondary,
+        fontFamily: typography.fontFamily.body,
         fontSize: 19,
         lineHeight: 31,
         marginTop: spacing.xl,
@@ -364,13 +365,13 @@ const styles = StyleSheet.create({
     },
     proofValue: {
         color: colors.textPrimary,
+        fontFamily: typography.fontFamily.heading,
         fontSize: 18,
-        fontWeight: '900',
     },
     proofLabel: {
         color: colors.textMuted,
+        fontFamily: typography.fontFamily.bodyBold,
         fontSize: 12,
-        fontWeight: '800',
         marginTop: 4,
     },
     heroVisualWrap: {
@@ -409,15 +410,15 @@ const styles = StyleSheet.create({
     },
     visualKicker: {
         color: colors.textMuted,
+        fontFamily: typography.fontFamily.bodyExtraBold,
         fontSize: 11,
-        fontWeight: '900',
         letterSpacing: 1,
         textTransform: 'uppercase',
     },
     visualTitle: {
         color: colors.textPrimary,
+        fontFamily: typography.fontFamily.heading,
         fontSize: 27,
-        fontWeight: '900',
         marginTop: 5,
     },
     livePill: {
@@ -572,9 +573,9 @@ const styles = StyleSheet.create({
     },
     sectionTitle: {
         color: colors.textPrimary,
+        fontFamily: typography.fontFamily.heading,
         fontSize: 44,
         lineHeight: 50,
-        fontWeight: '900',
         letterSpacing: -1.5,
         textAlign: 'center',
     },
@@ -615,12 +616,13 @@ const styles = StyleSheet.create({
     },
     featureTitle: {
         color: colors.textPrimary,
+        fontFamily: typography.fontFamily.heading,
         fontSize: 22,
-        fontWeight: '900',
         marginBottom: spacing.md,
     },
     featureDescription: {
         color: colors.textSecondary,
+        fontFamily: typography.fontFamily.body,
         fontSize: 15,
         lineHeight: 25,
     },
@@ -663,9 +665,9 @@ const styles = StyleSheet.create({
     },
     launchTitle: {
         color: colors.textPrimary,
+        fontFamily: typography.fontFamily.heading,
         fontSize: 34,
         lineHeight: 40,
-        fontWeight: '900',
         letterSpacing: -1,
     },
     launchTitleCompact: {
