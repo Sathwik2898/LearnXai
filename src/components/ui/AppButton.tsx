@@ -1,5 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
+
 import { colors } from '../../theme/colors';
 import { radius } from '../../theme/radius';
 import { typography } from '../../theme/typography';
@@ -12,6 +13,8 @@ type AppButtonProps = {
   variant?: AppButtonVariant;
   disabled?: boolean;
   loading?: boolean;
+  fullWidth?: boolean;
+  style?: StyleProp<ViewStyle>;
 };
 
 export function AppButton({
@@ -20,6 +23,8 @@ export function AppButton({
   variant = 'primary',
   disabled = false,
   loading = false,
+  fullWidth = false,
+  style,
 }: AppButtonProps) {
   const isDisabled = disabled || loading;
   const buttonText = loading ? 'Please wait...' : title;
@@ -30,8 +35,10 @@ export function AppButton({
       disabled={isDisabled}
       style={({ pressed }) => [
         styles.pressable,
+        fullWidth && styles.fullWidth,
         pressed && !isDisabled && styles.pressed,
         isDisabled && styles.disabled,
+        style,
       ]}
     >
       {variant === 'primary' ? (
@@ -39,19 +46,19 @@ export function AppButton({
           colors={['#A99BFF', '#7467FF', '#42D8FF'] as const}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={styles.primarySurface}
+          style={styles.surface}
         >
-          <View style={styles.primaryShine} />
+          <View style={styles.primaryShine} pointerEvents="none" />
           <Text style={styles.primaryText}>{buttonText}</Text>
         </LinearGradient>
       ) : null}
 
       {variant === 'secondary' ? (
         <LinearGradient
-          colors={['rgba(255,255,255,0.12)', 'rgba(255,255,255,0.045)'] as const}
+          colors={['rgba(255,255,255,0.13)', 'rgba(255,255,255,0.045)'] as const}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={styles.secondarySurface}
+          style={[styles.surface, styles.secondarySurface]}
         >
           <Text style={styles.secondaryText}>{buttonText}</Text>
         </LinearGradient>
@@ -70,14 +77,19 @@ const styles = StyleSheet.create({
   pressable: {
     alignSelf: 'flex-start',
   },
+  fullWidth: {
+    width: '100%',
+    alignSelf: 'stretch',
+  },
   pressed: {
-    opacity: 0.86,
+    opacity: 0.88,
     transform: [{ scale: 0.985 }],
   },
   disabled: {
     opacity: 0.55,
   },
-  primarySurface: {
+  surface: {
+    width: '100%',
     minHeight: 50,
     paddingHorizontal: 24,
     paddingVertical: 15,
@@ -101,7 +113,7 @@ const styles = StyleSheet.create({
     right: 10,
     height: 18,
     borderRadius: radius.pill,
-    backgroundColor: 'rgba(255,255,255,0.20)',
+    backgroundColor: 'rgba(255,255,255,0.22)',
   },
   primaryText: {
     color: colors.textPrimary,
@@ -110,14 +122,10 @@ const styles = StyleSheet.create({
     letterSpacing: 0.2,
   },
   secondarySurface: {
-    minHeight: 50,
-    paddingHorizontal: 24,
-    paddingVertical: 15,
-    borderRadius: radius.pill,
-    alignItems: 'center',
-    justifyContent: 'center',
     borderWidth: 1,
     borderColor: colors.borderLight,
+    shadowOpacity: 0,
+    elevation: 0,
   },
   secondaryText: {
     color: colors.indigoLight,
@@ -125,14 +133,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     letterSpacing: 0.2,
   },
+  ghostSurface: {
+    minHeight: 42,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   ghostText: {
     color: colors.indigoLight,
     fontFamily: typography.fontFamily.bodyExtraBold,
     fontSize: 15,
   },
-  ghostSurface: {
-    minHeight: 42,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
 });
