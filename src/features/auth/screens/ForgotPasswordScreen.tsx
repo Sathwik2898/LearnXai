@@ -1,145 +1,150 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { sendForgotPasswordEmail } from '../api/authApi';
 
-import { PageShell } from '../../../components/layout/PageShell';
-import { PublicHeader } from '../../../components/layout/PublicHeader';
-import { AppButton } from '../../../components/ui/AppButton';
-import { AppCard } from '../../../components/ui/AppCard';
-import { AppInput } from '../../../components/ui/AppInput';
-import { colors } from '../../../theme/colors';
-import { radius } from '../../../theme/radius';
-import { spacing } from '../../../theme/spacing';
-import { authService } from '../services/authService';
-
-export function ForgotPasswordScreen() {
+export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   async function handleForgotPassword() {
-    setSuccessMessage('');
+    setMessage('');
     setErrorMessage('');
 
-    if (!email.trim()) {
-      setErrorMessage('Please enter your email address.');
+    if (!email.includes('@')) {
+      setErrorMessage('Please enter a valid email address.');
       return;
     }
 
     try {
-      setIsSubmitting(true);
-
-      const response = await authService.forgotPassword({
-        email: email.trim(),
+      setLoading(true);
+      const result = await sendForgotPasswordEmail({
+        email: email.trim().toLowerCase(),
       });
 
-      setSuccessMessage(response.message);
+      setMessage(result?.message || 'Password reset email has been sent.');
     } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : 'Something went wrong. Please try again.';
-
-      setErrorMessage(message);
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to send email.');
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   }
 
   return (
-    <PageShell scroll header={<PublicHeader />} contentStyle={styles.content}>
+    <KeyboardAvoidingView
+      style={styles.page}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+        <TouchableOpacity onPress={() => router.push('/login')} style={styles.backButton}>
+          <Text style={styles.backText}>← Back to Login</Text>
+        </TouchableOpacity>
 
-      <View style={styles.authSection}>
-        <AppCard style={styles.card}>
-          <Text style={styles.badge}>Account Recovery</Text>
-
-          <Text style={styles.title}>Forgot password?</Text>
-
+        <View style={styles.card}>
+          <Text style={styles.badge}>Password help</Text>
+          <Text style={styles.title}>Reset your password</Text>
           <Text style={styles.subtitle}>
-            Enter your email address and we will prepare a password reset request.
+            Enter your registered email. We will send password reset instructions.
           </Text>
 
           <View style={styles.form}>
-            <AppInput
-              label="Email"
-              placeholder="you@example.com"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-            />
+            <View>
+              <Text style={styles.label}>Email address</Text>
+              <TextInput
+                value={email}
+                onChangeText={setEmail}
+                placeholder="you@example.com"
+                placeholderTextColor="#9ca3af"
+                autoCapitalize="none"
+                keyboardType="email-address"
+                style={styles.input}
+              />
+            </View>
 
-            {errorMessage ? (
-              <Text style={styles.errorText}>{errorMessage}</Text>
-            ) : null}
+            {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+            {message ? <Text style={styles.success}>{message}</Text> : null}
 
-            {successMessage ? (
-              <Text style={styles.successText}>{successMessage}</Text>
-            ) : null}
-
-            <AppButton
-              title="Request Reset Link"
-              loading={isSubmitting}
+            <TouchableOpacity
               onPress={handleForgotPassword}
-            />
+              disabled={loading}
+              style={[styles.primaryButton, loading && styles.disabledButton]}
+            >
+              {loading ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.primaryButtonText}>Send reset email</Text>
+              )}
+            </TouchableOpacity>
           </View>
-        </AppCard>
-      </View>
-    </PageShell>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  page: { flex: 1, backgroundColor: '#fbfbfb' },
   content: {
-    paddingHorizontal: 20,
-    paddingTop: spacing['3xl'],
-    paddingBottom: spacing.xl,
-  },
-  authSection: {
+    flexGrow: 1,
+    padding: 24,
+    justifyContent: 'center',
+    maxWidth: 560,
     width: '100%',
-    alignItems: 'center',
+    alignSelf: 'center',
   },
+  backButton: { marginBottom: 20 },
+  backText: { color: '#0a6e42', fontWeight: '800' },
   card: {
-    width: '100%',
-    maxWidth: 460,
-    borderRadius: radius['3xl'],
-    padding: 26,
+    backgroundColor: '#fff',
+    borderRadius: 28,
+    padding: 28,
+    borderWidth: 1,
+    borderColor: 'rgba(15,23,42,0.08)',
   },
   badge: {
-    color: colors.indigoMedium,
-    fontSize: 13,
+    color: '#0a6e42',
+    fontSize: 12,
     fontWeight: '900',
     textTransform: 'uppercase',
-    letterSpacing: 1,
-    marginBottom: spacing.sm,
-    textAlign: 'center',
+    marginBottom: 12,
   },
-  title: {
-    color: colors.textPrimary,
-    fontSize: 30,
-    fontWeight: '900',
-    textAlign: 'center',
+  title: { color: '#111827', fontSize: 34, lineHeight: 40, fontWeight: '900' },
+  subtitle: { marginTop: 12, color: '#4b5563', fontSize: 15, lineHeight: 23 },
+  form: { marginTop: 28, gap: 16 },
+  label: { color: '#111827', fontSize: 13, fontWeight: '800', marginBottom: 8 },
+  input: {
+    minHeight: 50,
+    borderWidth: 1,
+    borderColor: 'rgba(15,23,42,0.12)',
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    color: '#111827',
+    backgroundColor: '#fff',
   },
-  subtitle: {
-    color: colors.textSecondary,
-    fontSize: 15,
-    lineHeight: 23,
-    textAlign: 'center',
-    marginTop: spacing.sm,
-    marginBottom: spacing.xl,
+  primaryButton: {
+    minHeight: 52,
+    borderRadius: 999,
+    backgroundColor: '#0e8f56',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 6,
   },
-  form: {
-    gap: spacing.md,
-  },
-  errorText: {
-    color: '#FCA5A5',
-    fontSize: 13,
-    fontWeight: '700',
-    lineHeight: 20,
-  },
-  successText: {
-    color: '#86EFAC',
-    fontSize: 13,
-    fontWeight: '700',
-    lineHeight: 20,
-  },
+  disabledButton: { opacity: 0.7 },
+  primaryButtonText: { color: '#fff', fontWeight: '900', fontSize: 15 },
+  error: { color: '#b91c1c', fontWeight: '700', lineHeight: 20 },
+  success: { color: '#0a6e42', fontWeight: '800', lineHeight: 20 },
+  note: { color: '#6b7280', fontSize: 12, lineHeight: 18, textAlign: 'center' },
+  link: { color: '#0a6e42', fontWeight: '800', textAlign: 'center' },
 });

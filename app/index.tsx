@@ -1,3 +1,3 @@
-import { LandingScreen } from '../src/features/marketing/screens/LandingScreen';
+import LandingScreen from '../src/features/marketing/screens/LandingScreen.web';
 
 export default LandingScreen;

@@ -1,133 +1,326 @@
-import { PublicHeader } from '@/src/components/layout/PublicHeader';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { PageShell } from '../../../components/layout/PageShell';
-import { AppInput } from '../../../components/ui/AppInput';
-import { colors } from '../../../theme/colors';
-import { radius } from '../../../theme/radius';
-import { spacing } from '../../../theme/spacing';
+import { useState } from 'react';
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native';
+import { loginUser } from '../api/authApi';
+import { AuthLogoLink } from '../components/AuthLogoLink';
+import { AuthMentorPreview } from '../components/AuthMentorPreview';
 
-export function LoginScreen() {
+const FRONTEND_DEMO_MODE = true;
+
+const FONT_FAMILY = Platform.select({
+  web: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  default: 'System',
+}) as string;
+
+export default function LoginScreen() {
+  const { width, height } = useWindowDimensions();
+  const isCompact = width < 940;
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  async function handleLogin() {
+    setMessage('');
+    setErrorMessage('');
+
+    if (!email.includes('@') || !password) {
+      setErrorMessage('Please enter email and password.');
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      if (FRONTEND_DEMO_MODE) {
+        await new Promise((resolve) => setTimeout(resolve, 600));
+        setMessage('Demo login successful. Backend authentication will be connected next.');
+        return;
+      }
+
+      const result = await loginUser({
+        email: email.trim().toLowerCase(),
+        password,
+      });
+
+      setMessage(result?.message || 'Login successful.');
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Login failed.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <PageShell header={<PublicHeader />} contentStyle={styles.content}>
-
-      <View style={styles.authSection}>
-        <View style={styles.card}>
-          <Text style={styles.badge}>Platform Access</Text>
-          <Text style={styles.title}>Login to LearnXai</Text>
-          <Text style={styles.subtitle}>
-            Access is currently limited while the platform is being prepared.
-          </Text>
-
-          <View style={styles.form}>
-            <AppInput
-              label="Email"
-              placeholder="you@example.com"
-              keyboardType="email-address"
-            />
-
-            <AppInput
-              label="Password"
-              placeholder="Enter password"
-              secureTextEntry
-            />
-
-            <Pressable style={styles.primaryButton}>
-              <Text style={styles.primaryButtonText}>Sign In</Text>
-            </Pressable>
-            <Pressable onPress={() => router.push('/forgot-password')}>
-              <Text style={styles.footerLink}>Forgot password?</Text>
-            </Pressable>
-            <Pressable onPress={() => router.push('/register')}>
-              <Text style={styles.footerText}>
-                New here? <Text style={styles.footerLinkInline}>Join early access</Text>
-              </Text>
-            </Pressable>
+    <KeyboardAvoidingView
+      style={[styles.page, { minHeight: height }, isCompact && styles.pageCompact]}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <View style={[styles.leftPane, isCompact && styles.leftPaneCompact]}>
+        <ScrollView
+          contentContainerStyle={[styles.formScroll, isCompact && styles.formScrollCompact]}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.topArea}>
+            <AuthLogoLink />
           </View>
-        </View>
+
+          <View style={styles.formWrap}>
+            <Text style={styles.title}>Welcome back</Text>
+            <Text style={styles.subtitle}>Sign in to continue your learning.</Text>
+
+            <View style={styles.form}>
+              <View>
+                <Text style={styles.label}>Email</Text>
+                <TextInput
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="you@domain.com"
+                  placeholderTextColor="#8b95a1"
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  style={styles.input}
+                />
+              </View>
+
+              <View>
+                <Text style={styles.label}>Password</Text>
+                <TextInput
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="Enter password"
+                  placeholderTextColor="#8b95a1"
+                  secureTextEntry
+                  style={styles.input}
+                />
+              </View>
+
+              <View style={styles.loginOptions}>
+                <TouchableOpacity
+                  onPress={() => setRememberMe((current) => !current)}
+                  style={styles.rememberRow}
+                >
+                  <View style={[styles.checkbox, rememberMe && styles.checkboxActive]}>
+                    {rememberMe ? <Text style={styles.checkboxTick}>✓</Text> : null}
+                  </View>
+                  <Text style={styles.optionText}>Remember me</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => router.push('/forgot-password')}>
+                  <Text style={styles.forgotText}>Forgot password?</Text>
+                </TouchableOpacity>
+              </View>
+
+              {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+              {message ? <Text style={styles.success}>{message}</Text> : null}
+
+              <TouchableOpacity
+                onPress={handleLogin}
+                disabled={loading}
+                style={[styles.primaryButton, loading && styles.disabledButton]}
+              >
+                {loading ? (
+                  <ActivityIndicator color="#ffffff" />
+                ) : (
+                  <Text style={styles.primaryButtonText}>Sign in</Text>
+                )}
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => router.push('/register')}>
+                <Text style={styles.switchText}>
+                  New to LearnXai? <Text style={styles.switchStrong}>Create an account</Text>
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <Text style={styles.footer}>© 2026 LearnXai</Text>
+        </ScrollView>
       </View>
-    </PageShell>
+
+      {!isCompact ? <AuthMentorPreview /> : null}
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  content: {
+  page: {
     flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: spacing['3xl'],
-    paddingBottom: spacing.xl,
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
   },
-  authSection: {
-    width: '100%',
-    alignItems: 'center',
+  pageCompact: {
+    flexDirection: 'column',
   },
-  footerLink: {
-    color: colors.indigoLight,
-    textAlign: 'center',
-    fontSize: 14,
-    fontWeight: '800',
-    marginTop: spacing.sm,
-  },
-  centerArea: {
+  leftPane: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#ffffff',
   },
-  card: {
+  leftPaneCompact: {
+    minHeight: '100%',
+  },
+  formScroll: {
+    flexGrow: 1,
+    paddingHorizontal: 64,
+    paddingTop: 46,
+    paddingBottom: 34,
+    justifyContent: 'space-between',
+  },
+  formScrollCompact: {
+    paddingHorizontal: 24,
+    paddingTop: 28,
+  },
+  topArea: {
     width: '100%',
-    maxWidth: 460,
+    maxWidth: 480,
     alignSelf: 'center',
-    backgroundColor: colors.surfaceGlass,
-    borderWidth: 1,
-    borderColor: colors.borderGlass,
-    borderRadius: radius['3xl'],
-    padding: 26,
   },
-  badge: {
-    color: colors.indigoMedium,
-    fontSize: 13,
-    fontWeight: '900',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    marginBottom: spacing.sm,
-    textAlign: 'center',
+  formWrap: {
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
+    marginVertical: 34,
   },
   title: {
-    color: colors.textPrimary,
-    fontSize: 30,
-    fontWeight: '900',
-    textAlign: 'center',
+    color: '#111827',
+    fontFamily: FONT_FAMILY,
+    fontSize: 38,
+    lineHeight: 44,
+    fontWeight: '850',
+    letterSpacing: -1.2,
   },
   subtitle: {
-    color: colors.textSecondary,
-    fontSize: 15,
-    lineHeight: 23,
-    textAlign: 'center',
-    marginTop: spacing.sm,
-    marginBottom: spacing.xl,
+    marginTop: 12,
+    color: '#475569',
+    fontFamily: FONT_FAMILY,
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '450',
   },
   form: {
-    gap: spacing.md,
+    marginTop: 34,
+    gap: 18,
   },
-  primaryButton: {
-    marginTop: spacing.sm,
-    backgroundColor: colors.primary,
-    paddingVertical: 14,
-    borderRadius: radius.lg,
+  label: {
+    color: '#111827',
+    fontFamily: FONT_FAMILY,
+    fontSize: 13,
+    fontWeight: '750',
+    marginBottom: 8,
+  },
+  input: {
+    minHeight: 52,
+    borderWidth: 1,
+    borderColor: 'rgba(15,23,42,0.14)',
+    borderRadius: 14,
+    paddingHorizontal: 18,
+    color: '#111827',
+    backgroundColor: '#ffffff',
+    fontFamily: FONT_FAMILY,
+    fontSize: 15.5,
+  },
+  loginOptions: {
+    marginTop: -2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  rememberRow: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  primaryButtonText: {
-    color: colors.textPrimary,
-    fontSize: 15,
+  checkbox: {
+    width: 17,
+    height: 17,
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: '#94a3b8',
+    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkboxActive: {
+    backgroundColor: '#111418',
+    borderColor: '#111418',
+  },
+  checkboxTick: {
+    color: '#ffffff',
+    fontFamily: FONT_FAMILY,
+    fontSize: 11,
     fontWeight: '900',
   },
-  footerText: {
-    color: colors.textSecondary,
-    textAlign: 'center',
+  optionText: {
+    color: '#475569',
+    fontFamily: FONT_FAMILY,
     fontSize: 14,
-    marginTop: spacing.sm,
   },
-  footerLinkInline: {
-    color: colors.indigoLight,
-    fontWeight: '900',
+  forgotText: {
+    color: '#111827',
+    fontFamily: FONT_FAMILY,
+    fontSize: 14,
+    fontWeight: '650',
+  },
+  primaryButton: {
+    minHeight: 56,
+    borderRadius: 999,
+    backgroundColor: '#111418',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 4,
+  },
+  disabledButton: {
+    opacity: 0.7,
+  },
+  primaryButtonText: {
+    color: '#ffffff',
+    fontFamily: FONT_FAMILY,
+    fontWeight: '800',
+    fontSize: 15.5,
+  },
+  switchText: {
+    color: '#475569',
+    fontFamily: FONT_FAMILY,
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 8,
+  },
+  switchStrong: {
+    color: '#111827',
+    fontWeight: '800',
+  },
+  error: {
+    color: '#b91c1c',
+    fontFamily: FONT_FAMILY,
+    fontWeight: '700',
+    lineHeight: 20,
+  },
+  success: {
+    color: '#0a6e42',
+    fontFamily: FONT_FAMILY,
+    fontWeight: '800',
+    lineHeight: 20,
+  },
+  footer: {
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
+    color: '#475569',
+    fontFamily: FONT_FAMILY,
+    fontSize: 13,
   },
 });
