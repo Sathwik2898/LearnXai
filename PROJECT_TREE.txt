@@ -1,0 +1,123 @@
+﻿📁 .vscode
+  📄 extensions.json
+  📄 settings.json
+📁 app
+  📄 _layout.tsx
+  📄 courses.tsx
+  📄 forgot-password.tsx
+  📄 index.tsx
+  📄 login.tsx
+  📄 register.tsx
+📁 assets
+  📁 images
+    📄 android-icon-background.png
+    📄 android-icon-foreground.png
+    📄 android-icon-monochrome.png
+    📄 favicon.png
+    📄 icon.png
+    📄 partial-react-logo.png
+    📄 react-logo.png
+    📄 react-logo@2x.png
+    📄 react-logo@3x.png
+    📄 splash-icon.png
+📁 backend
+  📁 learnxai-api
+    📁 prisma
+      📁 migrations
+        📁 20260715160823_init_user_model
+          📄 migration.sql
+        📄 migration_lock.toml
+      📄 schema.prisma
+    📁 src
+      📄 app.controller.spec.ts
+      📄 app.controller.ts
+      📄 app.module.ts
+      📄 app.service.ts
+      📄 main.ts
+    📁 test
+      📄 app.e2e-spec.ts
+      📄 jest-e2e.json
+    📄 .env
+    📄 .gitignore
+    📄 .prettierrc
+    📄 eslint.config.mjs
+    📄 nest-cli.json
+    📄 package.json
+    📄 package-lock.json
+    📄 prisma.config.ts
+    📄 README.md
+    📄 tsconfig.build.json
+    📄 tsconfig.json
+📁 components
+  📁 ui
+    📄 collapsible.tsx
+    📄 icon-symbol.ios.tsx
+    📄 icon-symbol.tsx
+  📄 external-link.tsx
+  📄 haptic-tab.tsx
+  📄 hello-wave.tsx
+  📄 parallax-scroll-view.tsx
+  📄 themed-text.tsx
+  📄 themed-view.tsx
+📁 constants
+  📄 theme.ts
+📁 docs
+  📄 DEMO_FEEDBACK.md
+  📄 DEV_HISTORY.md
+📁 hooks
+  📄 use-color-scheme.ts
+  📄 use-color-scheme.web.ts
+  📄 use-theme-color.ts
+📁 prisma
+  📄 schema.prisma
+📁 scripts
+  📄 reset-project.js
+📁 src
+  📁 components
+    📁 layout
+      📄 PageShell.tsx
+      📄 PublicHeader.tsx
+    📁 ui
+      📄 AppButton.tsx
+      📄 AppCard.tsx
+      📄 AppInput.tsx
+  📁 config
+    📄 env.ts
+  📁 features
+    📁 auth
+      📁 api
+        📄 authApi.ts
+      📁 components
+        📄 AuthLogoLink.tsx
+        📄 AuthMentorPreview.tsx
+      📁 screens
+        📄 ForgotPasswordScreen.tsx
+        📄 LoginScreen.tsx
+        📄 RegisterScreen.tsx
+      📁 services
+        📄 authService.ts
+      📁 types
+        📄 auth.types.ts
+    📁 marketing
+      📁 screens
+        📄 CoursesPreviewScreen.tsx
+        📄 LandingScreen.tsx
+        📄 LandingScreen.web.tsx
+  📁 services
+    📁 api
+      📄 apiClient.ts
+      📄 endpoints.ts
+  📁 theme
+    📄 colors.ts
+    📄 radius.ts
+    📄 spacing.ts
+    📄 typography.ts
+📄 .gitignore
+📄 app.json
+📄 eslint.config.js
+📄 expo-env.d.ts
+📄 package.json
+📄 package-lock.json
+📄 PROJECT_TREE.txt
+📄 README.md
+📄 tsconfig.json
