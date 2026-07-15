@@ -1,3 +1,6 @@
+// This is your Prisma schema file.
+// LearnXai uses PostgreSQL + Prisma 7.
+
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
