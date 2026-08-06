@@ -1,5 +1,10 @@
 # LearnXai Development History
 
+> Historical log: this file preserves the sequence and rationale of early work.
+> Statements labeled as current or next reflect their original date and may be
+> superseded. Use [BUILD_PROGRESS.md](./BUILD_PROGRESS.md) and
+> [EXECUTION_PLAN.md](./EXECUTION_PLAN.md) for current status and sequencing.
+
 ## Project Identity
 
 LearnXai is the real production codebase for an AI-first LMS platform.

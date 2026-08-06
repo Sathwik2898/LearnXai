@@ -1,5 +1,11 @@
 # LearnXai Demo Feedback
 
+> Historical snapshot: this file records an early frontend demo review. It is
+> retained for context and is not the current product scope or build status.
+> Use [BUILD_PROGRESS.md](./BUILD_PROGRESS.md),
+> [PRODUCT_REQUIREMENTS.md](./PRODUCT_REQUIREMENTS.md), and
+> [EXECUTION_PLAN.md](./EXECUTION_PLAN.md) as the current sources of truth.
+
 ## Demo completed
 The frontend demo for LearnXai was completed successfully.
 

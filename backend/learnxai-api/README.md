@@ -1,98 +1,102 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# LearnXai API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This directory is the only LearnXai backend. It is a NestJS/TypeScript application backed by PostgreSQL through Prisma 7.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Repository-wide product, architecture, API, database, security, test, and deployment contracts live under the root `docs/` directory. Read the root `AGENTS.md` before implementation work.
 
-## Description
+## Current capabilities
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- learner registration with validated input, normalized email, duplicate detection, and bcrypt password hashing;
+- login with generic unauthorized behavior and a short-lived JWT access token;
+- Bearer-token authentication and protected current-user lookup;
+- explicit safe user responses that exclude `passwordHash`;
+- health endpoint and isolated unit/e2e coverage.
 
-## Project setup
+Current endpoints:
 
-```bash
-$ npm install
+| Method | Path | Authentication | Purpose |
+| --- | --- | --- | --- |
+| `GET` | `/` | Public | Basic application response |
+| `GET` | `/auth/health` | Public | Current liveness response |
+| `POST` | `/auth/register` | Public | Register a learner |
+| `POST` | `/auth/login` | Public | Issue an access token |
+| `GET` | `/auth/me` | Bearer JWT | Return the current safe user |
+
+See `../../docs/API_CONTRACTS.md` for the exact current contracts and explicitly planned future contracts.
+
+## Canonical layout
+
+- `src/auth/` — authentication controller, service, DTOs, JWT service, and tests
+- `src/common/` — reusable guards, decorators, and future cross-cutting primitives
+- `src/config/` — validated environment access
+- `src/prisma/` — Prisma module and service
+- `src/users/` — user access and safe response mapping
+- `prisma/schema.prisma` — the only Prisma schema
+- `prisma/migrations/` — reviewed migration history
+- `test/` — e2e configuration and tests
+
+`src/generated/prisma/`, `dist/`, coverage, dependencies, and environment files are generated or local artifacts and remain ignored.
+
+## Environment
+
+Copy the keys from `.env.example` into a local ignored `.env` and provide environment-appropriate values:
+
+- `DATABASE_URL`
+- `JWT_ACCESS_SECRET`
+- `JWT_ACCESS_EXPIRES_IN`
+- `JWT_ISSUER`
+- `JWT_AUDIENCE`
+- `PORT`
+
+The example values are placeholders. Never commit, print, or reuse real secrets. Staging and production must not use an insecure fallback secret.
+
+## Installation and generation
+
+From this directory:
+
+```powershell
+npm ci
 ```
 
-## Compile and run the project
+The `postinstall` script runs `prisma:generate`. Generated Prisma client files are intentionally not tracked.
 
-```bash
-# development
-$ npm run start
+Explicit Prisma commands:
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```powershell
+npm run prisma:generate
+npm run prisma:validate
 ```
 
-## Run tests
+Do not use `prisma db push`, create migrations, or apply migrations unless the active milestone explicitly includes a reviewed schema change.
 
-```bash
-# unit tests
-$ npm run test
+## Development and production-style start
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```powershell
+npm run start:dev
 ```
 
-## Deployment
+For the compiled application:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+```powershell
+npm run build
+npm run start:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+`start:prod` runs `dist/main`. A real runtime needs a reachable PostgreSQL database and valid environment configuration.
 
-## Resources
+## Quality checks
 
-Check out a few resources that may come in handy when working with NestJS:
+```powershell
+npm run prisma:generate
+npm run prisma:validate
+npm run lint
+npm run build
+npm test -- --runInBand --no-cache
+npm run test:e2e -- --runInBand --no-cache
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+The default lint command is non-mutating. Use `npm run lint:fix` only when an active implementation milestone authorizes formatting changes. The e2e suite is isolated from production data.
 
-## Support
+## Current boundaries
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Refresh-token rotation, logout/revocation, verification/recovery email, role-policy enforcement, profiles, LMS domain modules, organizations, jobs, audit logging, readiness, Docker/CI, and AI/RAG are not implemented yet. Follow `../../docs/EXECUTION_PLAN.md`; do not skip ahead or add adjacent features to a milestone.

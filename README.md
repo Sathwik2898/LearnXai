@@ -1,50 +1,97 @@
-# Welcome to your Expo app 👋
+# LearnXai
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+LearnXai is a production-oriented, cross-platform learning management system under active development. The current repository contains an Expo/React Native frontend and a NestJS/PostgreSQL backend with learner registration, login, JWT access-token authentication, and protected current-user access.
 
-## Get started
+The long-term product scope, current implementation state, and approved implementation order are documented in the repository rather than implied by this README.
 
-1. Install dependencies
+## Current stack
 
-   ```bash
-   npm install
-   ```
+- Frontend: Expo Router, React Native, React Native Web, and TypeScript
+- Backend: NestJS and TypeScript
+- Database: PostgreSQL
+- ORM: Prisma 7
+- Planned AI: provider abstraction, a later OpenAI implementation, PostgreSQL `pgvector`, and grounded course-aware RAG
+- Planned delivery: Docker Compose, GitHub Actions, staging-first deployment, and environment-based configuration
 
-2. Start the app
+## Repository layout
 
-   ```bash
-   npx expo start
-   ```
+- `app/` — Expo Router route entry points
+- `src/` — frontend implementation
+- `backend/learnxai-api/` — the only NestJS backend
+- `backend/learnxai-api/prisma/` — the only Prisma schema and migrations
+- `docs/` — product, architecture, contracts, execution, quality, security, and operations documentation
+- `AGENTS.md` — permanent milestone operating rules
 
-In the output, you'll find options to open the app in a
+See [docs/PROJECT_TREE.txt](./docs/PROJECT_TREE.txt) for a documentation-oriented source tree.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Implemented routes and endpoints
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Frontend routes currently include `/`, `/courses`, `/register`, `/login`, and `/forgot-password`. Several screens remain demo-oriented and are not yet integrated with the authenticated backend flow.
 
-## Get a fresh project
+The backend currently exposes:
 
-When you're ready, run:
+- `GET /`
+- `GET /auth/health`
+- `POST /auth/register`
+- `POST /auth/login`
+- `GET /auth/me` with a Bearer access token
 
-```bash
-npm run reset-project
+Refresh tokens, logout/revocation, email verification, password reset, frontend authentication integration, LMS domain modules, organizations, and AI are planned rather than implemented.
+
+## Local setup
+
+Prerequisites:
+
+- a Node.js/npm version compatible with the committed lockfiles;
+- PostgreSQL for a real backend runtime;
+- environment values based on `backend/learnxai-api/.env.example`.
+
+Never commit local `.env` files or print their values.
+
+Install and run the frontend:
+
+```powershell
+npm ci
+npm run typecheck
+npm run lint
+npm run web
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Use `npm run start`, `npm run android`, or `npm run ios` for the other Expo development targets.
 
-## Learn more
+Install and verify the backend:
 
-To learn more about developing your project with Expo, look at the following resources:
+```powershell
+Set-Location backend/learnxai-api
+npm ci
+npm run prisma:validate
+npm run lint
+npm run build
+npm test -- --runInBand --no-cache
+npm run test:e2e -- --runInBand --no-cache
+npm run start:dev
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+`npm ci` generates the ignored Prisma client through the backend `postinstall` script. The e2e tests use isolated test doubles and do not require or modify production data.
 
-## Join the community
+## Product and execution documentation
 
-Join our community of developers creating universal apps.
+- [Product requirements](./docs/PRODUCT_REQUIREMENTS.md)
+- [Screen inventory](./docs/SCREEN_INVENTORY.md)
+- [API contracts](./docs/API_CONTRACTS.md)
+- [Architecture](./docs/ARCHITECTURE.md)
+- [Database design](./docs/DATABASE_DESIGN.md)
+- [Sequential execution plan](./docs/EXECUTION_PLAN.md)
+- [Test strategy](./docs/TEST_STRATEGY.md)
+- [Security checklist](./docs/SECURITY_CHECKLIST.md)
+- [Deployment runbook](./docs/DEPLOYMENT_RUNBOOK.md)
+- [Decision log](./docs/DECISIONS.md)
+- [Build progress](./docs/BUILD_PROGRESS.md)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Historical context is retained in [demo feedback](./docs/DEMO_FEEDBACK.md) and [development history](./docs/DEV_HISTORY.md); those files are not the current source of truth.
+
+## Contribution rules
+
+Read `AGENTS.md` and the relevant documents before starting a milestone. Work in the approved sequence, keep milestones independently verified and committed, and never commit generated files, build output, or secrets. Do not push, merge into `main`, change production, provision paid services, or make destructive database changes without the required approval.
+
+Do not publish fabricated testimonials, customer logos, user counts, placement claims, ratings, or outcomes.

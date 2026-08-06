@@ -1,123 +1,122 @@
-﻿📁 .vscode
-  📄 extensions.json
-  📄 settings.json
-📁 app
-  📄 _layout.tsx
-  📄 courses.tsx
-  📄 forgot-password.tsx
-  📄 index.tsx
-  📄 login.tsx
-  📄 register.tsx
-📁 assets
-  📁 images
-    📄 android-icon-background.png
-    📄 android-icon-foreground.png
-    📄 android-icon-monochrome.png
-    📄 favicon.png
-    📄 icon.png
-    📄 partial-react-logo.png
-    📄 react-logo.png
-    📄 react-logo@2x.png
-    📄 react-logo@3x.png
-    📄 splash-icon.png
-📁 backend
-  📁 learnxai-api
-    📁 prisma
-      📁 migrations
-        📁 20260715160823_init_user_model
-          📄 migration.sql
-        📄 migration_lock.toml
-      📄 schema.prisma
-    📁 src
-      📄 app.controller.spec.ts
-      📄 app.controller.ts
-      📄 app.module.ts
-      📄 app.service.ts
-      📄 main.ts
-    📁 test
-      📄 app.e2e-spec.ts
-      📄 jest-e2e.json
-    📄 .env
-    📄 .gitignore
-    📄 .prettierrc
-    📄 eslint.config.mjs
-    📄 nest-cli.json
-    📄 package.json
-    📄 package-lock.json
-    📄 prisma.config.ts
-    📄 README.md
-    📄 tsconfig.build.json
-    📄 tsconfig.json
-📁 components
-  📁 ui
-    📄 collapsible.tsx
-    📄 icon-symbol.ios.tsx
-    📄 icon-symbol.tsx
-  📄 external-link.tsx
-  📄 haptic-tab.tsx
-  📄 hello-wave.tsx
-  📄 parallax-scroll-view.tsx
-  📄 themed-text.tsx
-  📄 themed-view.tsx
-📁 constants
-  📄 theme.ts
-📁 docs
-  📄 DEMO_FEEDBACK.md
-  📄 DEV_HISTORY.md
-📁 hooks
-  📄 use-color-scheme.ts
-  📄 use-color-scheme.web.ts
-  📄 use-theme-color.ts
-📁 prisma
-  📄 schema.prisma
-📁 scripts
-  📄 reset-project.js
-📁 src
-  📁 components
-    📁 layout
-      📄 PageShell.tsx
-      📄 PublicHeader.tsx
-    📁 ui
-      📄 AppButton.tsx
-      📄 AppCard.tsx
-      📄 AppInput.tsx
-  📁 config
-    📄 env.ts
-  📁 features
-    📁 auth
-      📁 api
-        📄 authApi.ts
-      📁 components
-        📄 AuthLogoLink.tsx
-        📄 AuthMentorPreview.tsx
-      📁 screens
-        📄 ForgotPasswordScreen.tsx
-        📄 LoginScreen.tsx
-        📄 RegisterScreen.tsx
-      📁 services
-        📄 authService.ts
-      📁 types
-        📄 auth.types.ts
-    📁 marketing
-      📁 screens
-        📄 CoursesPreviewScreen.tsx
-        📄 LandingScreen.tsx
-        📄 LandingScreen.web.tsx
-  📁 services
-    📁 api
-      📄 apiClient.ts
-      📄 endpoints.ts
-  📁 theme
-    📄 colors.ts
-    📄 radius.ts
-    📄 spacing.ts
-    📄 typography.ts
-📄 .gitignore
-📄 app.json
-📄 eslint.config.js
-📄 expo-env.d.ts
-📄 package.json
-📄 package-lock.json
-📄 PROJECT_TREE.txt
-📄 README.md
-📄 tsconfig.json
+LearnXai canonical source tree
+==============================
+
+This documentation-oriented tree records canonical roots and maintained
+source/configuration. Dependency folders, lockfile contents, binary asset files,
+coverage, build output, caches, local environment files, and generated Prisma
+client files are intentionally collapsed or omitted.
+
+LearnXai/
+|-- AGENTS.md
+|-- README.md
+|-- package.json
+|-- package-lock.json
+|-- tsconfig.json
+|-- app.json
+|-- eslint.config.js
+|-- expo-env.d.ts
+|-- .gitignore
+|-- app/                              Expo Router routes
+|   |-- _layout.tsx
+|   |-- index.tsx
+|   |-- courses.tsx
+|   |-- register.tsx
+|   |-- login.tsx
+|   `-- forgot-password.tsx
+|-- src/                              Frontend implementation
+|   |-- components/
+|   |   |-- layout/
+|   |   `-- ui/
+|   |-- config/env.ts
+|   |-- features/
+|   |   |-- auth/
+|   |   |   |-- api/authApi.ts
+|   |   |   |-- components/
+|   |   |   |-- screens/
+|   |   |   |-- services/authService.ts
+|   |   |   `-- types/auth.types.ts
+|   |   `-- marketing/screens/
+|   |       |-- CoursesPreviewScreen.tsx
+|   |       |-- LandingScreen.tsx
+|   |       `-- LandingScreen.web.tsx
+|   |-- services/api/
+|   `-- theme/
+|-- components/                       Retained Expo starter components
+|-- constants/                        Retained Expo starter constants
+|-- hooks/                            Retained Expo starter hooks
+|-- assets/images/                    Frontend image/icon assets
+|-- scripts/reset-project.js          Retained Expo starter script
+|-- backend/
+|   `-- learnxai-api/                 The only backend root
+|       |-- README.md
+|       |-- package.json
+|       |-- package-lock.json
+|       |-- nest-cli.json
+|       |-- tsconfig.json
+|       |-- tsconfig.build.json
+|       |-- eslint.config.mjs
+|       |-- prisma.config.ts
+|       |-- .env.example              Placeholders only; real .env is ignored
+|       |-- .gitignore
+|       |-- prisma/                   The only Prisma root
+|       |   |-- schema.prisma
+|       |   `-- migrations/
+|       |       |-- migration_lock.toml
+|       |       `-- 20260715160823_init_user_model/migration.sql
+|       |-- src/
+|       |   |-- main.ts
+|       |   |-- app.module.ts
+|       |   |-- app.controller.ts
+|       |   |-- app.controller.spec.ts
+|       |   |-- app.service.ts
+|       |   |-- auth/
+|       |   |   |-- auth.module.ts
+|       |   |   |-- auth.controller.ts
+|       |   |   |-- auth.service.ts
+|       |   |   |-- auth.service.spec.ts
+|       |   |   |-- jwt-access.service.ts
+|       |   |   |-- jwt-access.service.spec.ts
+|       |   |   |-- dto/
+|       |   |   `-- types/
+|       |   |-- common/
+|       |   |   |-- decorators/current-user.decorator.ts
+|       |   |   |-- filters/
+|       |   |   `-- guards/jwt-auth.guard.ts
+|       |   |-- config/env.ts
+|       |   |-- prisma/
+|       |   |   |-- prisma.module.ts
+|       |   |   `-- prisma.service.ts
+|       |   `-- users/
+|       |       |-- user-response.ts
+|       |       |-- users.module.ts
+|       |       `-- users.service.ts
+|       `-- test/
+|           |-- app.e2e-spec.ts
+|           `-- jest-e2e.json
+`-- docs/
+    |-- PRODUCT_REQUIREMENTS.md
+    |-- SCREEN_INVENTORY.md
+    |-- API_CONTRACTS.md
+    |-- ARCHITECTURE.md
+    |-- DATABASE_DESIGN.md
+    |-- EXECUTION_PLAN.md
+    |-- TEST_STRATEGY.md
+    |-- SECURITY_CHECKLIST.md
+    |-- DEPLOYMENT_RUNBOOK.md
+    |-- DECISIONS.md
+    |-- BUILD_PROGRESS.md
+    |-- PROJECT_TREE.txt
+    |-- DEMO_FEEDBACK.md              Historical snapshot
+    `-- DEV_HISTORY.md                Historical log
+
+Canonical ownership rules
+-------------------------
+
+- Frontend routes: app/
+- Frontend implementation: src/
+- Backend: backend/learnxai-api/
+- Prisma schema and migrations: backend/learnxai-api/prisma/
+- Generated Prisma client: backend/learnxai-api/src/generated/prisma/ (ignored)
+- Permanent product/execution documentation: AGENTS.md and docs/
+
+There is no root Prisma schema, second backend, or tracked local .env file.
