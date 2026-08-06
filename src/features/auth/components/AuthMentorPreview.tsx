@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     color: '#111827',
     fontFamily: FONT_FAMILY,
     fontSize: 16,
-    fontWeight: '850',
+    fontWeight: '800',
   },
   previewSubTitle: {
     marginTop: 2,

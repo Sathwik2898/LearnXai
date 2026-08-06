@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     color: '#111827',
     fontFamily: FONT_FAMILY,
     fontSize: 25,
-    fontWeight: '850',
+    fontWeight: '800',
     letterSpacing: -0.6,
   },
 });

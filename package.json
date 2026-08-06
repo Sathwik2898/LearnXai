@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "typecheck": "tsc --noEmit --incremental false",
+    "lint": "eslint app src components hooks constants --no-cache"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.4.2",

@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY,
     fontSize: 38,
     lineHeight: 44,
-    fontWeight: '850',
+    fontWeight: '800',
     letterSpacing: -1.2,
   },
   subtitle: {
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY,
     fontSize: 16,
     lineHeight: 24,
-    fontWeight: '450',
+    fontWeight: '400',
   },
   form: {
     marginTop: 34,
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     color: '#111827',
     fontFamily: FONT_FAMILY,
     fontSize: 13,
-    fontWeight: '750',
+    fontWeight: '700',
     marginBottom: 8,
   },
   input: {

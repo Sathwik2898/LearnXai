@@ -17,11 +17,7 @@ export class UsersService {
     });
   }
 
-  createLearner(data: {
-    name: string;
-    email: string;
-    passwordHash: string;
-  }) {
+  createLearner(data: { name: string; email: string; passwordHash: string }) {
     return this.prisma.user.create({
       data,
     });
